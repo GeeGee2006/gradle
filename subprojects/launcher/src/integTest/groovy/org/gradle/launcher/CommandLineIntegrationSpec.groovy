@@ -32,7 +32,7 @@ class CommandLineIntegrationSpec extends AbstractIntegrationSpec {
     @Unroll
     def "reasonable failure message when --max-workers=#value"() {
         given:
-        requireGradleDistribution() // otherwise exception gets thrown in testing infrastructure
+        executer.requireDaemon()  // otherwise exception gets thrown in testing infrastructure
 
         when:
         args("--max-workers=$value")
@@ -50,7 +50,7 @@ class CommandLineIntegrationSpec extends AbstractIntegrationSpec {
     @Unroll
     def "reasonable failure message when org.gradle.workers.max=#value"() {
         given:
-        requireGradleDistribution() // otherwise exception gets thrown in testing infrastructure
+        executer.requireDaemon().requireIsolatedDaemons() // otherwise exception gets thrown in testing infrastructure
 
         when:
         args("-Dorg.gradle.workers.max=$value")

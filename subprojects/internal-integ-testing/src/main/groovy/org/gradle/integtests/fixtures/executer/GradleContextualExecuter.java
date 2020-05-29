@@ -110,6 +110,9 @@ public class GradleContextualExecuter extends AbstractDelegatingGradleExecuter {
         try {
             gradleExecuter.assertCanExecute();
         } catch (AssertionError assertionError) {
+            if (gradleExecuter instanceof InProcessGradleExecuter) {
+                throw new RuntimeException("Running tests with a Gradle distribution in embedded mode is no longer supported.", assertionError);
+            }
             gradleExecuter = new NoDaemonGradleExecuter(getDistribution(), getTestDirectoryProvider());
             configureExecuter(gradleExecuter);
         }

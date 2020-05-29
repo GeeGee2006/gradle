@@ -32,7 +32,6 @@ open class AbstractPrecompiledScriptPluginTest : AbstractPluginTest() {
 
     @Before
     fun setupPluginTest() {
-        requireGradleDistributionOnEmbeddedExecuter()
         executer.beforeExecute {
             // Ignore stacktraces when the Kotlin daemon fails
             // See https://github.com/gradle/gradle-private/issues/2936

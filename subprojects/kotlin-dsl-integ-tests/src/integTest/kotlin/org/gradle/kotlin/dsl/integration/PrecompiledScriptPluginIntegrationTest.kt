@@ -50,8 +50,6 @@ class PrecompiledScriptPluginIntegrationTest : AbstractPluginIntegrationTest() {
     @ToBeFixedForInstantExecution
     fun `precompiled script plugins tasks are cached and relocatable`() {
 
-        requireGradleDistributionOnEmbeddedExecuter()
-
         val firstLocation = "first-location"
         val secondLocation = "second-location"
         val cacheDir = newDir("cache-dir")
@@ -133,8 +131,6 @@ class PrecompiledScriptPluginIntegrationTest : AbstractPluginIntegrationTest() {
     @ToBeFixedForInstantExecution(because = "Kotlin Gradle Plugin")
     fun `can apply precompiled script plugin from groovy script`() {
 
-        requireGradleDistributionOnEmbeddedExecuter()
-
         withKotlinBuildSrc()
         withFile("buildSrc/src/main/kotlin/my-plugin.gradle.kts", """
             tasks.register("myTask") {}
@@ -153,8 +149,6 @@ class PrecompiledScriptPluginIntegrationTest : AbstractPluginIntegrationTest() {
     @Test
     @ToBeFixedForInstantExecution
     fun `accessors are available after script body change`() {
-
-        requireGradleDistributionOnEmbeddedExecuter()
 
         withKotlinBuildSrc()
         val myPluginScript = withFile("buildSrc/src/main/kotlin/my-plugin.gradle.kts", """
@@ -191,8 +185,6 @@ class PrecompiledScriptPluginIntegrationTest : AbstractPluginIntegrationTest() {
     @ToBeFixedForInstantExecution(because = "Kotlin Gradle Plugin")
     fun `accessors are available after re-running tasks`() {
 
-        requireGradleDistributionOnEmbeddedExecuter()
-
         withKotlinBuildSrc()
         withFile("buildSrc/src/main/kotlin/my-plugin.gradle.kts", """
             plugins { base }
@@ -215,8 +207,6 @@ class PrecompiledScriptPluginIntegrationTest : AbstractPluginIntegrationTest() {
     @Test
     @ToBeFixedForInstantExecution(because = "Kotlin Gradle Plugin")
     fun `accessors are available after renaming precompiled script plugin from project dependency`() {
-
-        requireGradleDistributionOnEmbeddedExecuter()
 
         withSettings("""
             $defaultSettingsScript

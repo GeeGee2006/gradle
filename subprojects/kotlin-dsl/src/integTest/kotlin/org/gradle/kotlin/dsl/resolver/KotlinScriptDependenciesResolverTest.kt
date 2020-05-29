@@ -18,6 +18,7 @@ package org.gradle.kotlin.dsl.resolver
 
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
+import org.gradle.integtests.fixtures.executer.GradleContextualExecuter
 
 import org.gradle.kotlin.dsl.fixtures.AbstractKotlinIntegrationTest
 
@@ -374,8 +375,9 @@ class KotlinScriptDependenciesResolverTest : AbstractKotlinIntegrationTest() {
     fun environment(vararg entries: Pair<String, Any?>) =
         mapOf(
             "projectRoot" to projectRoot,
-            "gradleHome" to distribution.gradleHomeDir,
             "gradleUserHome" to buildContext.gradleUserHomeDir.canonicalPath
+        ) + (
+            if (GradleContextualExecuter.isEmbedded()) emptyMap() else mapOf("gradleHome" to distribution.gradleHomeDir)
         ) + entries.toMap()
 
     private

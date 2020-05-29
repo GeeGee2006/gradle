@@ -21,10 +21,6 @@ import spock.lang.Issue
 
 class GradleImplDepsShadingIssuesIntegrationTest extends BaseGradleImplDepsIntegrationTest {
 
-    def setup() {
-        requireOwnGradleUserHomeDir()
-    }
-
     @Issue("GRADLE-3456")
     def "doesn't fail when using Ivy in a plugin"() {
 

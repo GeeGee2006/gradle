@@ -17,21 +17,8 @@
 package org.gradle.launcher.daemon
 
 import org.gradle.integtests.fixtures.daemon.DaemonIntegrationSpec
-import org.gradle.internal.os.OperatingSystem
 
 class DaemonPriorityIntegrationTest extends DaemonIntegrationSpec {
-
-    /*
-     * Our command line length is already close to the limit of what Windows can handle.
-     * The few extra arguments that the priority change requires seem to push it over the edge.
-     * Using a distribution drastically shrinks the command line length, as the classpath is only
-     * one jar in that case.
-     */
-    def setup() {
-        if (OperatingSystem.current().isWindows()) {
-            requireGradleDistribution()
-        }
-    }
 
     def "forks new daemon when priority is set to a different value via command line"() {
         when:

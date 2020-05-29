@@ -23,7 +23,6 @@ class GradleImplDepsPerformanceIntegrationTest extends BaseGradleImplDepsIntegra
 
     @ToBeFixedForInstantExecution(skip = ToBeFixedForInstantExecution.Skip.FLAKY)
     def "Gradle API JAR is generated in an acceptable time frame"() {
-        requireOwnGradleUserHomeDir()
         buildFile << """
             configurations {
                 deps
@@ -44,7 +43,6 @@ class GradleImplDepsPerformanceIntegrationTest extends BaseGradleImplDepsIntegra
 
     @ToBeFixedForInstantExecution
     def "TestKit JAR is generated in an acceptable time frame"() {
-        requireOwnGradleUserHomeDir()
         buildFile << """
             configurations {
                 deps

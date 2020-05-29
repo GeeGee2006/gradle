@@ -17,10 +17,13 @@
 package org.gradle.plugin.devel.impldeps
 
 import com.google.common.collect.Maps
+import org.gradle.integtests.fixtures.executer.GradleContextualExecuter
 import org.gradle.testfixtures.ProjectBuilder
+import spock.lang.IgnoreIf
 
 class GradleImplDepsVisibilityIntegrationTest extends BaseGradleImplDepsIntegrationTest {
 
+    @IgnoreIf({ GradleContextualExecuter.embedded }) // Runs a build with 'gradleApi()' dependency that needs a real distribution
     def "cannot compile against classes that are not part of Gradle's public API"() {
         when:
         buildFile << testablePluginProject()

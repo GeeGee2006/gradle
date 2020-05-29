@@ -20,7 +20,6 @@ class GradleImplDepsGenerationIntegrationTest extends BaseGradleImplDepsIntegrat
 
     def "Gradle API is not generated if not declared by build"() {
         given:
-        requireOwnGradleUserHomeDir()
         buildFile << applyJavaPlugin()
 
         when:
@@ -32,7 +31,6 @@ class GradleImplDepsGenerationIntegrationTest extends BaseGradleImplDepsIntegrat
 
     def "buildSrc project implicitly forces generation of Gradle API JAR"() {
         given:
-        requireOwnGradleUserHomeDir()
         buildFile << applyJavaPlugin()
         temporaryFolder.createFile('buildSrc/src/main/groovy/MyPlugin.groovy') << customGroovyPlugin()
 

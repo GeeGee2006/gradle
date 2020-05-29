@@ -20,9 +20,6 @@ import org.gradle.api.logging.configuration.ConsoleOutput
 import org.gradle.util.GradleVersion
 
 class GradleImplDepsLoggingIntegrationTest extends BaseGradleImplDepsIntegrationTest {
-    def setup() {
-        requireOwnGradleUserHomeDir()
-    }
 
     def "Generating Gradle API jar is logged with rich console"() {
         given:

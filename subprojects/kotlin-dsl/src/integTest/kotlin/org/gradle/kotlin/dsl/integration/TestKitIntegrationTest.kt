@@ -31,8 +31,6 @@ class TestKitIntegrationTest : AbstractKotlinIntegrationTest() {
     @ToBeFixedForInstantExecution
     fun `withPluginClasspath works`() {
 
-        requireGradleDistributionOnEmbeddedExecuter()
-
         withDefaultSettings()
 
         withBuildScript("""

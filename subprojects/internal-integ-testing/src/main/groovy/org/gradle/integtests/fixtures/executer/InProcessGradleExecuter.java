@@ -121,7 +121,6 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
@@ -396,17 +395,26 @@ public class InProcessGradleExecuter extends DaemonGradleExecuter {
     }
 
     @Override
+    public GradleExecuter withDefaultCharacterEncoding(String defaultCharacterEncoding) {
+        if (!Charset.forName(defaultCharacterEncoding).equals(Charset.defaultCharset())) {
+            // need to fork to apply the new default character encoding
+            requireDaemon().requireIsolatedDaemons();
+        }
+        return super.withDefaultCharacterEncoding(defaultCharacterEncoding);
+    }
+
+    @Override
+    public GradleExecuter withDefaultLocale(Locale defaultLocale) {
+        if (!defaultLocale.equals(Locale.getDefault())) {
+            // need to fork to apply the new default locale
+            requireDaemon().requireIsolatedDaemons();
+        }
+        return super.withDefaultLocale(defaultLocale);
+    }
+
+    @Override
     public void assertCanExecute() {
         assertNull(getExecutable());
-        String defaultEncoding = getImplicitJvmSystemProperties().get("file.encoding");
-        if (defaultEncoding != null) {
-            assertEquals(Charset.forName(defaultEncoding), Charset.defaultCharset());
-        }
-        Locale defaultLocale = getDefaultLocale();
-        if (defaultLocale != null) {
-            assertEquals(defaultLocale, Locale.getDefault());
-        }
-        assertFalse(isRequiresGradleDistribution());
     }
 
     @Override

@@ -33,8 +33,6 @@ class PluginDependenciesSpecAccessorsIntegrationTest : AbstractKotlinIntegration
     @ToBeFixedForInstantExecution(because = "Kotlin Gradle Plugin")
     fun `can use accessors for plugins in the buildSrc classpath`() {
 
-        requireGradleDistributionOnEmbeddedExecuter()
-
         withKotlinBuildSrc()
         withFile("buildSrc/src/main/kotlin/my/plugin-a.gradle.kts", """
             package my
